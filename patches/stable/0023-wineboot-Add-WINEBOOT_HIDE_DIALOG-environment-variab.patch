@@ -1,0 +1,27 @@
+From d89b2375ccf6a8fc0d014bb962856ebd6365e973 Mon Sep 17 00:00:00 2001
+From: karim_adli <karimri@protonmail.com>
+Date: Fri, 20 Feb 2026 22:21:33 +0300
+Subject: [PATCH 23/24] wineboot: Add WINEBOOT_HIDE_DIALOG environment variable
+
+---
+ programs/wineboot/wineboot.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/programs/wineboot/wineboot.c b/programs/wineboot/wineboot.c
+index 1e2a7b7b4c4..71cb347bbfc 100644
+--- a/programs/wineboot/wineboot.c
++++ b/programs/wineboot/wineboot.c
+@@ -1512,7 +1512,9 @@ static HWND show_wait_window(void)
+ {
+     HWND hwnd = CreateDialogParamW( GetModuleHandleW(0), MAKEINTRESOURCEW(IDD_WAITDLG), 0,
+                                     wait_dlgproc, (LPARAM)prettyprint_configdir() );
+-    ShowWindow( hwnd, SW_SHOWNORMAL );
++    WCHAR *hide = _wgetenv( L"WINEBOOT_HIDE_DIALOG" );
++    if (hide == NULL)
++    	ShowWindow( hwnd, SW_SHOWNORMAL );
+     return hwnd;
+ }
+ 
+-- 
+2.53.0
+

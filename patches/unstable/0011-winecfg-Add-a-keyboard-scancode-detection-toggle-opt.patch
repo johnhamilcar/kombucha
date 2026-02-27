@@ -1,7 +1,7 @@
-From 49a647aee89a2c55ca906a0bcbbbac12278c2b97 Mon Sep 17 00:00:00 2001
+From 3027598731cd48c124ad21dbd913e83d24235bbf Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?R=C3=A9mi=20Bernon?= <rbernon@codeweavers.com>
 Date: Fri, 6 Jan 2023 09:27:18 +0100
-Subject: [PATCH 11/21] winecfg: Add a keyboard scancode detection toggle
+Subject: [PATCH 11/23] winecfg: Add a keyboard scancode detection toggle
  option.
 
 Wine-Bug: https://bugs.winehq.org/show_bug.cgi?id=30984

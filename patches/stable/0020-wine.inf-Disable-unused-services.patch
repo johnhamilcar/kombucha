@@ -1,7 +1,7 @@
-From bf33516969a93105720bb3240ed838b075c56454 Mon Sep 17 00:00:00 2001
+From 32e79fc7ca5d4074ad8895f3e09835ee7241a824 Mon Sep 17 00:00:00 2001
 From: sewn <sewn@disroot.org>
 Date: Fri, 26 Dec 2025 17:11:53 +0300
-Subject: [PATCH 20/22] wine.inf: Disable unused services
+Subject: [PATCH 20/24] wine.inf: Disable unused services
 
 Signed-off-by: sewn <sewn@disroot.org>
 ---

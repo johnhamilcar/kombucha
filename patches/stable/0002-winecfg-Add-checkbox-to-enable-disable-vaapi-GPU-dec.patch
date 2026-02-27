@@ -1,7 +1,7 @@
-From 79136acd05e1cc71c66f4269cbc1773eb59ceb73 Mon Sep 17 00:00:00 2001
+From ae1bac82b7272793f7364cf68452fb1ee2687d2f Mon Sep 17 00:00:00 2001
 From: Sebastian Lackner <sebastian@fds-team.de>
 Date: Sat, 21 Feb 2015 23:37:26 +0100
-Subject: [PATCH 02/22] winecfg: Add checkbox to enable/disable vaapi GPU
+Subject: [PATCH 02/24] winecfg: Add checkbox to enable/disable vaapi GPU
  decoder.
 
 ---

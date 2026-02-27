@@ -1,7 +1,7 @@
-From d8d15c214e06c88edfe087e6cf14cf072977a9f6 Mon Sep 17 00:00:00 2001
+From 6e8d89b642f7f18bb2fac1abc028bb1be98ae701 Mon Sep 17 00:00:00 2001
 From: sewn <sewn@disroot.org>
 Date: Thu, 25 Dec 2025 21:32:39 +0300
-Subject: [PATCH 19/22] winedbg: Disable
+Subject: [PATCH 19/24] winedbg: Disable
 
 Signed-off-by: sewn <sewn@disroot.org>
 ---

@@ -1,7 +1,7 @@
-From 064cec41dd5251a9eed2b6aaedbb1b0151df54a6 Mon Sep 17 00:00:00 2001
+From f0b8faf8d422ddd3af3628c3986617cea4ca0526 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?R=C3=A9mi=20Bernon?= <rbernon@codeweavers.com>
 Date: Fri, 6 Jan 2023 08:09:11 +0100
-Subject: [PATCH 08/22] winex11: Write supported keyboard layout list in
+Subject: [PATCH 08/24] winex11: Write supported keyboard layout list in
  registry.
 
 Wine-Bug: https://bugs.winehq.org/show_bug.cgi?id=30984

@@ -1,7 +1,7 @@
-From 43d1c16fae2f056177761d1f5fb66c9a08aa82ab Mon Sep 17 00:00:00 2001
+From 5456388c91478754434a1ece5b992fc4e3df2030 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?R=C3=A9mi=20Bernon?= <rbernon@codeweavers.com>
 Date: Fri, 6 Jan 2023 11:31:36 +0100
-Subject: [PATCH 14/22] winex11: Disable keyboard scancode auto-detection by
+Subject: [PATCH 14/24] winex11: Disable keyboard scancode auto-detection by
  default.
 
 Wine-Bug: https://bugs.winehq.org/show_bug.cgi?id=30984

@@ -1,7 +1,7 @@
-From 0db4e5f49f5da4416ed5e7a466ffd427d78b2b8f Mon Sep 17 00:00:00 2001
+From 1c505371615437f3246b5a0fac07071046eb8b0f Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Michael=20M=C3=BCller?= <michael@fds-team.de>
 Date: Sun, 9 Aug 2015 18:01:11 +0200
-Subject: [PATCH 05/22] winecfg: Add option to enable/disable GTK3 theming.
+Subject: [PATCH 05/24] winecfg: Add option to enable/disable GTK3 theming.
 
 ---
  programs/winecfg/resource.h |  1 +

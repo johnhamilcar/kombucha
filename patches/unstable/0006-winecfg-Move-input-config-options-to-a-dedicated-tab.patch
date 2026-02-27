@@ -1,7 +1,7 @@
-From a88591a2bff71d0326cc256256c7c29c9388bf6d Mon Sep 17 00:00:00 2001
+From 16636b1b8503b283ba63c2e7d1d16a15509e3b24 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?R=C3=A9mi=20Bernon?= <rbernon@codeweavers.com>
 Date: Thu, 5 Jan 2023 21:16:38 +0100
-Subject: [PATCH 06/21] winecfg: Move input config options to a dedicated tab.
+Subject: [PATCH 06/23] winecfg: Move input config options to a dedicated tab.
 
 Wine-Bug: https://bugs.winehq.org/show_bug.cgi?id=30984
 Wine-Bug: https://bugs.winehq.org/show_bug.cgi?id=45605

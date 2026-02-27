@@ -1,7 +1,7 @@
-From 9a96ad592479a8b40ac9cc2f3ace3b25e1f0a3c6 Mon Sep 17 00:00:00 2001
+From e382a8ce2d9e6c8210c67b36d21b315613b95039 Mon Sep 17 00:00:00 2001
 From: effectsbot <eff3ctsb0t@gmail.com>
 Date: Fri, 27 Feb 2026 19:43:49 +0100
-Subject: [PATCH 21/22] wine.inf: Add Kombucha-specific registry overrides
+Subject: [PATCH 21/24] wine.inf: Add Kombucha-specific registry overrides
 
 Signed-off-by: effectsbot <eff3ctsb0t@gmail.com>
 ---

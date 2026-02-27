@@ -1,7 +1,7 @@
-From b17559ff5f01bf737a331be09a4f87294c27c0d6 Mon Sep 17 00:00:00 2001
+From d00d7870830edecc1d3d7a339f459613db610f96 Mon Sep 17 00:00:00 2001
 From: Mark Harmstone <mark@harmstone.com>
 Date: Sun, 5 Apr 2015 14:16:11 +0100
-Subject: [PATCH 03/22] winecfg: Add checkbox to enable/disable EAX support.
+Subject: [PATCH 03/24] winecfg: Add checkbox to enable/disable EAX support.
 
 ---
  programs/winecfg/resource.h |  1 +
