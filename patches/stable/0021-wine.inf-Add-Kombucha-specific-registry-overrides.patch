@@ -1,0 +1,41 @@
+From 9a96ad592479a8b40ac9cc2f3ace3b25e1f0a3c6 Mon Sep 17 00:00:00 2001
+From: effectsbot <eff3ctsb0t@gmail.com>
+Date: Fri, 27 Feb 2026 19:43:49 +0100
+Subject: [PATCH 21/22] wine.inf: Add Kombucha-specific registry overrides
+
+Signed-off-by: effectsbot <eff3ctsb0t@gmail.com>
+---
+ loader/wine.inf.in | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
+
+diff --git a/loader/wine.inf.in b/loader/wine.inf.in
+index da23557b263..142aee5bb86 100644
+--- a/loader/wine.inf.in
++++ b/loader/wine.inf.in
+@@ -63,6 +63,7 @@ AddReg=\
+     Debugger,\
+     DirectX,\
+     Fonts,\
++    KombuchaOverrides,\
+     LicenseInformation,\
+     MCI,\
+     Misc,\
+@@ -1326,3 +1327,15 @@ InfFiles  = 17
+ NlsFiles  = 11
+ SortFiles = 10,globalization\sorting
+ WinmdFiles = 11,winmetadata
++
++[KombuchaOverrides]
++;; Global overrides
++HKCU,Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers,"",,"~ HIGHDPIAWARE"
++;; WebView2-specific overrides
++HKCU,Software\Wine\AppDefaults\msedgewebview2.exe,"Version",,"win8"
++HKCU,Software\Wine\AppDefaults\msedgewebview2.exe\DllOverrides,"d3d8",,"builtin"
++HKCU,Software\Wine\AppDefaults\msedgewebview2.exe\DllOverrides,"d3d9",,"builtin"
++HKCU,Software\Wine\AppDefaults\msedgewebview2.exe\DllOverrides,"d3d10core",,"builtin"
++HKCU,Software\Wine\AppDefaults\msedgewebview2.exe\DllOverrides,"d3d11",,"builtin"
++HKCU,Software\Wine\AppDefaults\msedgewebview2.exe\DllOverrides,"dxgi",,"builtin"
++HKCU,Software\Wine\Fonts\Replacements,"Arial",,"Liberation Sans"
+-- 
+2.53.0
+
