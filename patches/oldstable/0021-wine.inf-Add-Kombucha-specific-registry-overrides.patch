@@ -1,0 +1,43 @@
+From 3d7e335b53efc89dbf305a57dff53cb684934a01 Mon Sep 17 00:00:00 2001
+From: effectsbot <eff3ctsb0t@gmail.com>
+Date: Sun, 1 Mar 2026 16:09:28 +0100
+Subject: [PATCH 21/25] wine.inf: Add Kombucha-specific registry overrides
+
+Signed-off-by: effectsbot <eff3ctsb0t@gmail.com>
+---
+ loader/wine.inf.in | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+
+diff --git a/loader/wine.inf.in b/loader/wine.inf.in
+index e018dec..9703241 100644
+--- a/loader/wine.inf.in
++++ b/loader/wine.inf.in
+@@ -63,6 +63,7 @@ AddReg=\
+     Debugger,\
+     DirectX,\
+     Fonts,\
++    KombuchaOverrides,\
+     MCI,\
+     Misc,\
+     OLE,\
+@@ -2725,3 +2726,17 @@ EtcFiles  = 12,etc
+ InfFiles  = 17
+ NlsFiles  = 11
+ SortFiles = 10,globalization\sorting
++
++[KombuchaOverrides]
++;; Global overrides
++HKCU,Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers,"",,"~ HIGHDPIAWARE"
++;; Studio-specific overrides
++HKCU,Software\Wine\AppDefaults\RobloxStudioBeta.exe\DllOverrides,"msvcp140",,"native"
++;; WebView2-specific overrides
++HKCU,Software\Wine\AppDefaults\msedgewebview2.exe,"Version",,"win8"
++HKCU,Software\Wine\AppDefaults\msedgewebview2.exe\DllOverrides,"d3d8",,"builtin"
++HKCU,Software\Wine\AppDefaults\msedgewebview2.exe\DllOverrides,"d3d9",,"builtin"
++HKCU,Software\Wine\AppDefaults\msedgewebview2.exe\DllOverrides,"d3d10core",,"builtin"
++HKCU,Software\Wine\AppDefaults\msedgewebview2.exe\DllOverrides,"d3d11",,"builtin"
++HKCU,Software\Wine\AppDefaults\msedgewebview2.exe\DllOverrides,"dxgi",,"builtin"
++HKCU,Software\Wine\Fonts\Replacements,"Arial",,"Liberation Sans"
+-- 
+2.53.0
+

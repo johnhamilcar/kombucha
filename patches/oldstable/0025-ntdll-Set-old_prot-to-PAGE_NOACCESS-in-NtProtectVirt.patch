@@ -1,0 +1,33 @@
+From b1718214384760f10424a128d5e11834e1bcb328 Mon Sep 17 00:00:00 2001
+From: Kareem Aladli <karimri@protonmail.com>
+Date: Mon, 14 Jul 2025 17:17:32 +0300
+Subject: [PATCH 25/25] ntdll: Set old_prot to PAGE_NOACCESS in
+ NtProtectVirtualMemory() if the range is not mapped or committed.
+
+---
+ dlls/ntdll/unix/virtual.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/dlls/ntdll/unix/virtual.c b/dlls/ntdll/unix/virtual.c
+index 0c0a12c..08fc920 100644
+--- a/dlls/ntdll/unix/virtual.c
++++ b/dlls/ntdll/unix/virtual.c
+@@ -4980,6 +4980,7 @@ NTSTATUS WINAPI NtProtectVirtualMemory( HANDLE process, PVOID *addr_ptr, SIZE_T
+             *size_ptr = result.virtual_protect.size;
+             *old_prot = result.virtual_protect.prot;
+         }
++        else *old_prot = PAGE_NOACCESS;
+         return result.virtual_protect.status;
+     }
+ 
+@@ -5012,6 +5013,7 @@ NTSTATUS WINAPI NtProtectVirtualMemory( HANDLE process, PVOID *addr_ptr, SIZE_T
+         *size_ptr = size;
+         *old_prot = old;
+     }
++    else *old_prot = PAGE_NOACCESS;
+     return status;
+ }
+ 
+-- 
+2.53.0
+
