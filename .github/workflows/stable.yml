@@ -109,9 +109,10 @@ jobs:
         GH_REPO: ${{ github.repository }}
       run: |
         TAG="${{ env.KOMBUCHA_VERSION }}+$(date --utc +%Y%m%d%H%M%S)"
-        TARBALL="kombucha-${TAG}.tar.xz"
+        NAME="kombucha-${TAG}"
 
         cd "${{ env.INSTALL }}"/..
-        XZ_OPT=-9 tar -Jcf "$TARBALL" "$(basename ${{ env.INSTALL }})"
+        mv "${{ env.INSTALL }}" "${NAME}"
+        XZ_OPT=-9 tar -Jcf "${NAME}.tar.xz" "${NAME}"
 
-        gh release create --prerelease --generate-notes "$TAG" "$TARBALL"
+        gh release create --prerelease --generate-notes "${TAG}" "${NAME}.tar.xz"
