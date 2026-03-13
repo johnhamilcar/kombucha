@@ -36,7 +36,6 @@ jobs:
           binutils \
           build-essential \
           ccache \
-          gcc-mingw-w64-x86-64 \
           gettext \
           libasound2-dev \
           libavcodec-dev \
@@ -73,6 +72,7 @@ jobs:
           libxkbregistry-dev \
           libxrandr-dev \
           libxrender-dev \
+          mingw-w64 \
           ocl-icd-opencl-dev \
           samba-dev
 
