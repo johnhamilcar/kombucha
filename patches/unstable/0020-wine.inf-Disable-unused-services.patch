@@ -1,4 +1,4 @@
-From 341e6bc310e1e3a48dcf43334c50bdc7e9da4e7b Mon Sep 17 00:00:00 2001
+From 0687ff4ddfe6c61c099455c042ff15d7991878fe Mon Sep 17 00:00:00 2001
 From: sewn <sewn@disroot.org>
 Date: Fri, 26 Dec 2025 17:11:53 +0300
 Subject: [PATCH 20/23] wine.inf: Disable unused services
@@ -9,7 +9,7 @@ Signed-off-by: sewn <sewn@disroot.org>
  1 file changed, 3 deletions(-)
 
 diff --git a/loader/wine.inf.in b/loader/wine.inf.in
-index 8c58fb781e4..b9c25fa6f21 100644
+index 8c58fb7..b9c25fa 100644
 --- a/loader/wine.inf.in
 +++ b/loader/wine.inf.in
 @@ -1106,7 +1106,6 @@ StartType=3

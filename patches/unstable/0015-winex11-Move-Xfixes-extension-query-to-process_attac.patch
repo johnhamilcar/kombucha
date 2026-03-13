@@ -1,30 +1,30 @@
-From 34fb8d4150717ce3cf1f8cf009f642bff779140d Mon Sep 17 00:00:00 2001
-From: =?UTF-8?q?R=C3=A9mi=20Bernon?= <rbernon@codeweavers.com>
-Date: Fri, 12 Mar 2021 00:10:49 +0100
+From 7cac9792fa61e06289faa73f9c342b1edf26be62 Mon Sep 17 00:00:00 2001
+From: effectsbot <eff3ctsb0t@gmail.com>
+Date: Fri, 13 Mar 2026 22:14:12 +0100
 Subject: [PATCH 15/23] winex11: Move Xfixes extension query to process_attach.
 
-Signed-off-by: sewn <sewn@disroot.org>
+Signed-off-by: effectsbot <eff3ctsb0t@gmail.com>
 ---
- dlls/winex11.drv/clipboard.c   | 26 ++------------
- dlls/winex11.drv/x11drv.h      |  2 ++
- dlls/winex11.drv/x11drv_main.c | 63 ++++++++++++++++++++++++++++++++++
- dlls/winex11.drv/xfixes.h      | 36 +++++++++++++++++++
- 4 files changed, 103 insertions(+), 24 deletions(-)
+ dlls/winex11.drv/clipboard.c   |  26 +-------
+ dlls/winex11.drv/x11drv.h      |   2 +
+ dlls/winex11.drv/x11drv_main.c | 118 +++++++++++++++++++++++++++++++++
+ dlls/winex11.drv/xfixes.h      |  36 ++++++++++
+ 4 files changed, 158 insertions(+), 24 deletions(-)
  create mode 100644 dlls/winex11.drv/xfixes.h
 
 diff --git a/dlls/winex11.drv/clipboard.c b/dlls/winex11.drv/clipboard.c
-index 3f3473a4444..1ec7d006aec 100644
+index b98fd3e..715cbce 100644
 --- a/dlls/winex11.drv/clipboard.c
 +++ b/dlls/winex11.drv/clipboard.c
-@@ -83,6 +83,7 @@
+@@ -82,6 +82,7 @@
+ 
  #include "ntstatus.h"
- #define WIN32_NO_STATUS
  #include "x11drv.h"
 +#include "xfixes.h"
  
  #ifdef HAVE_X11_EXTENSIONS_XFIXES_H
  #include <X11/extensions/Xfixes.h>
-@@ -199,7 +200,6 @@ static UINT rendered_formats;
+@@ -198,7 +199,6 @@ static UINT rendered_formats;
  static ULONG last_clipboard_update;
  static struct clipboard_format **current_x11_formats;
  static unsigned int nb_current_x11_formats;
@@ -32,7 +32,7 @@ index 3f3473a4444..1ec7d006aec 100644
  
  Display *clipboard_display = NULL;
  
-@@ -2068,28 +2068,6 @@ static BOOL selection_notify_event( HWND hwnd, XEvent *event )
+@@ -2067,28 +2067,6 @@ static BOOL selection_notify_event( HWND hwnd, XEvent *event )
  static void xfixes_init(void)
  {
  #ifdef SONAME_LIBXFIXES
@@ -61,7 +61,7 @@ index 3f3473a4444..1ec7d006aec 100644
      if (!use_xfixes) return;
  
      pXFixesSelectSelectionInput(clipboard_display, import_window, x11drv_atom(CLIPBOARD),
-@@ -2103,7 +2081,7 @@ static void xfixes_init(void)
+@@ -2102,7 +2080,7 @@ static void xfixes_init(void)
                  XFixesSelectionWindowDestroyNotifyMask |
                  XFixesSelectionClientCloseNotifyMask);
      }
@@ -71,7 +71,7 @@ index 3f3473a4444..1ec7d006aec 100644
      TRACE("xfixes succesully initialized\n");
  #else
 diff --git a/dlls/winex11.drv/x11drv.h b/dlls/winex11.drv/x11drv.h
-index 011e1da0bc8..8f52ef240e1 100644
+index 011e1da..8f52ef2 100644
 --- a/dlls/winex11.drv/x11drv.h
 +++ b/dlls/winex11.drv/x11drv.h
 @@ -472,12 +472,14 @@ extern BOOL grab_fullscreen;
@@ -90,10 +90,10 @@ index 011e1da0bc8..8f52ef240e1 100644
  extern Display *clipboard_display;
  
 diff --git a/dlls/winex11.drv/x11drv_main.c b/dlls/winex11.drv/x11drv_main.c
-index cdf9632904c..e89d47157a8 100644
+index 1ac068a..13b1cba 100644
 --- a/dlls/winex11.drv/x11drv_main.c
 +++ b/dlls/winex11.drv/x11drv_main.c
-@@ -47,6 +47,7 @@
+@@ -46,6 +46,7 @@
  #include "x11drv.h"
  #include "winreg.h"
  #include "xcomposite.h"
@@ -101,7 +101,7 @@ index cdf9632904c..e89d47157a8 100644
  #include "wine/server.h"
  #include "wine/debug.h"
  #include "wine/list.h"
-@@ -69,6 +70,7 @@ BOOL usexvidmode = TRUE;
+@@ -68,6 +69,7 @@ BOOL usexvidmode = TRUE;
  BOOL usexrandr = TRUE;
  BOOL usexcomposite = TRUE;
  BOOL use_egl = TRUE;
@@ -109,7 +109,7 @@ index cdf9632904c..e89d47157a8 100644
  BOOL use_take_focus = TRUE;
  BOOL use_primary_selection = FALSE;
  BOOL use_system_cursors = TRUE;
-@@ -84,6 +86,7 @@ BOOL shape_layered_windows = TRUE;
+@@ -83,6 +85,7 @@ BOOL shape_layered_windows = TRUE;
  int copy_default_colors = 128;
  int alloc_system_colors = 256;
  int xrender_error_base = 0;
@@ -117,7 +117,7 @@ index cdf9632904c..e89d47157a8 100644
  char *process_name = NULL;
  
  static x11drv_error_callback err_callback;   /* current callback for error */
-@@ -652,6 +655,63 @@ sym_not_found:
+@@ -651,6 +654,118 @@ sym_not_found:
  }
  #endif /* defined(SONAME_LIBXCOMPOSITE) */
  
@@ -178,10 +178,65 @@ index cdf9632904c..e89d47157a8 100644
 +}
 +#endif /* SONAME_LIBXFIXES */
 +
++#define MAKE_FUNCPTR(f) typeof(f) * p##f;
++MAKE_FUNCPTR(XFixesQueryExtension)
++MAKE_FUNCPTR(XFixesQueryVersion)
++MAKE_FUNCPTR(XFixesCreateRegion)
++MAKE_FUNCPTR(XFixesCreateRegionFromGC)
++MAKE_FUNCPTR(XFixesSelectSelectionInput)
++#undef MAKE_FUNCPTR
++
++static void x11drv_load_xfixes(void)
++{
++    int event, error, major = 3, minor = 0;
++    void *xfixes;
++
++    if (!(xfixes = dlopen(SONAME_LIBXFIXES, RTLD_NOW)))
++    {
++        WARN("Xfixes library %s not found, disabled.\n", SONAME_LIBXFIXES);
++        return;
++    }
++
++#define LOAD_FUNCPTR(f) \
++    if (!(p##f = dlsym(xfixes, #f)))                          \
++    {                                                         \
++        WARN("Xfixes function %s not found, disabled\n", #f); \
++        dlclose(xfixes);                                      \
++        return;                                               \
++    }
++    LOAD_FUNCPTR(XFixesQueryExtension)
++    LOAD_FUNCPTR(XFixesQueryVersion)
++    LOAD_FUNCPTR(XFixesCreateRegion)
++    LOAD_FUNCPTR(XFixesCreateRegionFromGC)
++    LOAD_FUNCPTR(XFixesSelectSelectionInput)
++#undef LOAD_FUNCPTR
++
++    if (!pXFixesQueryExtension(gdi_display, &event, &error))
++    {
++        WARN("Xfixes extension not found, disabled.\n");
++        dlclose(xfixes);
++        return;
++    }
++
++    if (!pXFixesQueryVersion(gdi_display, &major, &minor) ||
++        major < 2)
++    {
++        WARN("Xfixes version 2.0 not found, disabled.\n");
++        dlclose(xfixes);
++        return;
++    }
++
++    TRACE("Xfixes, error %d, event %d, version %d.%d found\n",
++          error, event, major, minor);
++    use_xfixes = TRUE;
++    xfixes_event_base = event;
++}
++#endif /* SONAME_LIBXFIXES */
++
  static void init_visuals( Display *display, int screen )
  {
      int count;
-@@ -754,6 +814,9 @@ NTSTATUS __wine_unix_lib_init(void)
+@@ -753,6 +868,9 @@ NTSTATUS __wine_unix_lib_init(void)
      X11DRV_XF86VM_Init();
      /* initialize XRandR */
      X11DRV_XRandR_Init();
@@ -193,7 +248,7 @@ index cdf9632904c..e89d47157a8 100644
  #endif
 diff --git a/dlls/winex11.drv/xfixes.h b/dlls/winex11.drv/xfixes.h
 new file mode 100644
-index 00000000000..f3beea5efed
+index 0000000..f3beea5
 --- /dev/null
 +++ b/dlls/winex11.drv/xfixes.h
 @@ -0,0 +1,36 @@

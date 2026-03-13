@@ -1,4 +1,4 @@
-From 55ff71c74f0e3993dd658ecc3bc2b60e016e5e78 Mon Sep 17 00:00:00 2001
+From 0e19e083de297137cd424b9c7ae687a196888390 Mon Sep 17 00:00:00 2001
 From: sewn <sewn@disroot.org>
 Date: Sun, 21 Dec 2025 16:55:13 +0300
 Subject: [PATCH 16/23] winex11: Add Xwayland check
@@ -10,7 +10,7 @@ Signed-off-by: sewn <sewn@disroot.org>
  2 files changed, 4 insertions(+)
 
 diff --git a/dlls/winex11.drv/x11drv.h b/dlls/winex11.drv/x11drv.h
-index 8f52ef240e1..f6a8a42fcb8 100644
+index 8f52ef2..f6a8a42 100644
 --- a/dlls/winex11.drv/x11drv.h
 +++ b/dlls/winex11.drv/x11drv.h
 @@ -472,6 +472,7 @@ extern BOOL grab_fullscreen;
@@ -22,10 +22,10 @@ index 8f52ef240e1..f6a8a42fcb8 100644
  extern BOOL managed_mode;
  extern BOOL private_color_map;
 diff --git a/dlls/winex11.drv/x11drv_main.c b/dlls/winex11.drv/x11drv_main.c
-index e89d47157a8..4dfb02e7d76 100644
+index 13b1cba..dfb8c7f 100644
 --- a/dlls/winex11.drv/x11drv_main.c
 +++ b/dlls/winex11.drv/x11drv_main.c
-@@ -70,6 +70,7 @@ BOOL usexvidmode = TRUE;
+@@ -69,6 +69,7 @@ BOOL usexvidmode = TRUE;
  BOOL usexrandr = TRUE;
  BOOL usexcomposite = TRUE;
  BOOL use_egl = TRUE;
@@ -33,7 +33,7 @@ index e89d47157a8..4dfb02e7d76 100644
  BOOL use_xfixes = FALSE;
  BOOL use_take_focus = TRUE;
  BOOL use_primary_selection = FALSE;
-@@ -810,6 +811,8 @@ NTSTATUS __wine_unix_lib_init(void)
+@@ -864,6 +865,8 @@ NTSTATUS __wine_unix_lib_init(void)
                     DisplayHeight( display, default_visual.screen ));
      X11DRV_Settings_Init();
  

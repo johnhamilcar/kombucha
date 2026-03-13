@@ -1,4 +1,4 @@
-From 8db3e8ffa70049290e3e8314f076ecb2c57c0429 Mon Sep 17 00:00:00 2001
+From d3c453628ef475815326d61d2ae6ba1cf2c4a930 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?R=C3=A9mi=20Bernon?= <rbernon@codeweavers.com>
 Date: Wed, 30 Nov 2022 18:46:00 +0100
 Subject: [PATCH 13/23] winex11: Support fixed X11 keycode to scancode
@@ -17,7 +17,7 @@ Wine-Bug: https://bugs.winehq.org/show_bug.cgi?id=45605
  3 files changed, 47 insertions(+), 2 deletions(-)
 
 diff --git a/dlls/winex11.drv/keyboard.c b/dlls/winex11.drv/keyboard.c
-index 295ff887eb9..3ecf6ac1b61 100644
+index 295ff88..3ecf6ac 100644
 --- a/dlls/winex11.drv/keyboard.c
 +++ b/dlls/winex11.drv/keyboard.c
 @@ -64,6 +64,46 @@ static const unsigned int ControlMask = 1 << 2;
@@ -86,7 +86,7 @@ index 295ff887eb9..3ecf6ac1b61 100644
  	const char *ksname;
  	keysym = XkbKeycodeToKeysym( display, keyc, 0, 0 );
 diff --git a/dlls/winex11.drv/x11drv.h b/dlls/winex11.drv/x11drv.h
-index 0affd0294a4..011e1da0bc8 100644
+index 0affd02..011e1da 100644
 --- a/dlls/winex11.drv/x11drv.h
 +++ b/dlls/winex11.drv/x11drv.h
 @@ -470,6 +470,7 @@ extern BOOL use_primary_selection;
@@ -98,10 +98,10 @@ index 0affd0294a4..011e1da0bc8 100644
  extern BOOL managed_mode;
  extern BOOL private_color_map;
 diff --git a/dlls/winex11.drv/x11drv_main.c b/dlls/winex11.drv/x11drv_main.c
-index 5ed6d5418d1..87547c4a4b7 100644
+index d62aa55..e689026 100644
 --- a/dlls/winex11.drv/x11drv_main.c
 +++ b/dlls/winex11.drv/x11drv_main.c
-@@ -74,6 +74,7 @@ BOOL use_primary_selection = FALSE;
+@@ -73,6 +73,7 @@ BOOL use_primary_selection = FALSE;
  BOOL use_system_cursors = TRUE;
  BOOL grab_fullscreen = FALSE;
  int keyboard_layout = -1;
@@ -109,7 +109,7 @@ index 5ed6d5418d1..87547c4a4b7 100644
  BOOL managed_mode = TRUE;
  BOOL private_color_map = FALSE;
  int primary_monitor = 0;
-@@ -556,6 +557,9 @@ static void setup_options(void)
+@@ -555,6 +556,9 @@ static void setup_options(void)
      if (p) set_reg_string_value( hkey, "KeyboardLayoutList", p, len * sizeof(WCHAR) );
      free( p );
  

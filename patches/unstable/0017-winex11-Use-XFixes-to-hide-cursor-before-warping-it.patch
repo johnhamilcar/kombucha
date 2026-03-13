@@ -1,4 +1,4 @@
-From dc778e5940931461f062b1ad47c1c9e5ec73c426 Mon Sep 17 00:00:00 2001
+From 979e3a49f1f262f850e504fd16a256b36df49e2b Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?R=C3=A9mi=20Bernon?= <rbernon@codeweavers.com>
 Date: Tue, 25 Jul 2023 10:38:35 +0200
 Subject: [PATCH 17/23] winex11: Use XFixes to hide cursor before warping it.
@@ -14,7 +14,7 @@ Signed-off-by: sewn <sewn@disroot.org>
  3 files changed, 9 insertions(+)
 
 diff --git a/dlls/winex11.drv/mouse.c b/dlls/winex11.drv/mouse.c
-index 1ddd3027e88..1a8a5e42ef4 100644
+index 1ddd302..1a8a5e4 100644
 --- a/dlls/winex11.drv/mouse.c
 +++ b/dlls/winex11.drv/mouse.c
 @@ -51,6 +51,7 @@ MAKE_FUNCPTR(XcursorLibraryLoadCursor);
@@ -37,10 +37,10 @@ index 1ddd3027e88..1a8a5e42ef4 100644
      if (!clipping_cursor)
          XUngrabPointer( data->display, CurrentTime );
 diff --git a/dlls/winex11.drv/x11drv_main.c b/dlls/winex11.drv/x11drv_main.c
-index 4dfb02e7d76..468ccd7937f 100644
+index dfb8c7f..3d4d0d2 100644
 --- a/dlls/winex11.drv/x11drv_main.c
 +++ b/dlls/winex11.drv/x11drv_main.c
-@@ -659,11 +659,13 @@ sym_not_found:
+@@ -658,11 +658,13 @@ sym_not_found:
  #ifdef SONAME_LIBXFIXES
  
  #define MAKE_FUNCPTR(f) typeof(f) * p##f;
@@ -54,7 +54,7 @@ index 4dfb02e7d76..468ccd7937f 100644
  #undef MAKE_FUNCPTR
  
  static void x11drv_load_xfixes(void)
-@@ -684,11 +686,13 @@ static void x11drv_load_xfixes(void)
+@@ -683,11 +685,13 @@ static void x11drv_load_xfixes(void)
          dlclose(xfixes);                                      \
          return;                                               \
      }
@@ -69,7 +69,7 @@ index 4dfb02e7d76..468ccd7937f 100644
  
      if (!pXFixesQueryExtension(gdi_display, &event, &error))
 diff --git a/dlls/winex11.drv/xfixes.h b/dlls/winex11.drv/xfixes.h
-index f3beea5efed..6cd4e48425b 100644
+index f3beea5..6cd4e48 100644
 --- a/dlls/winex11.drv/xfixes.h
 +++ b/dlls/winex11.drv/xfixes.h
 @@ -27,9 +27,11 @@

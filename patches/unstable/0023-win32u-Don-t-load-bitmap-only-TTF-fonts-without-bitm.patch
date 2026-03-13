@@ -1,4 +1,4 @@
-From de221db179a556d90f49c51edd53f5cf96ab2c42 Mon Sep 17 00:00:00 2001
+From 4fc9e2735087df8675996a744049d2e550017fb2 Mon Sep 17 00:00:00 2001
 From: effectsbot <eff3ctsb0t@gmail.com>
 Date: Fri, 27 Feb 2026 23:55:05 +0100
 Subject: [PATCH 23/23] win32u: Don't load bitmap only TTF fonts without bitmap
@@ -12,10 +12,10 @@ Signed-off-by: effectsbot <eff3ctsb0t@gmail.com>
  1 file changed, 18 insertions(+), 1 deletion(-)
 
 diff --git a/dlls/win32u/freetype.c b/dlls/win32u/freetype.c
-index aeae190bc46..99f5be9c9bb 100644
+index a660b16..929f71c 100644
 --- a/dlls/win32u/freetype.c
 +++ b/dlls/win32u/freetype.c
-@@ -190,6 +190,8 @@ MAKE_FUNCPTR(FcStrSetMember);
+@@ -189,6 +189,8 @@ MAKE_FUNCPTR(FcStrSetMember);
  #define GET_BE_DWORD(x) RtlUlongByteSwap(x)
  #endif
  
@@ -24,7 +24,7 @@ index aeae190bc46..99f5be9c9bb 100644
  /* 'gasp' flags */
  #define GASP_GRIDFIT 0x01
  #define GASP_DOGRAY  0x02
-@@ -897,6 +899,8 @@ static struct unix_face *unix_face_create( const char *unix_name, void *data_ptr
+@@ -896,6 +898,8 @@ static struct unix_face *unix_face_create( const char *unix_name, void *data_ptr
      struct stat st;
      DWORD face_count;
      int fd, length;
@@ -33,7 +33,7 @@ index aeae190bc46..99f5be9c9bb 100644
  
      TRACE( "unix_name %s, face_index %u, data_ptr %p, data_size %u, flags %#x\n",
             unix_name, face_index, data_ptr, data_size, flags );
-@@ -993,7 +997,20 @@ static struct unix_face *unix_face_create( const char *unix_name, void *data_ptr
+@@ -992,7 +996,20 @@ static struct unix_face *unix_face_create( const char *unix_name, void *data_ptr
          else
              This->weight = This->ntm_flags & NTM_BOLD ? FW_BOLD : FW_NORMAL;
          This->font_version = get_font_version( This->ft_face );
