@@ -1,7 +1,7 @@
-From 18d3ac2c54b273cd849962ef945a5d0aced5df27 Mon Sep 17 00:00:00 2001
+From 9c7bd4dc12b13b2aa654c8c75101e1153a0a60d4 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Michael=20M=C3=BCller?= <michael@fds-team.de>
 Date: Sun, 14 Dec 2014 20:42:45 +0100
-Subject: [PATCH 01/19] winecfg: Add staging tab for CSMT.
+Subject: [PATCH 01/23] winecfg: Add staging tab for CSMT.
 
 ---
  programs/winecfg/Makefile.in |  1 +

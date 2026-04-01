@@ -1,7 +1,7 @@
-From b6022847d8aea5403f5e7d1b02a87c3f16519f87 Mon Sep 17 00:00:00 2001
+From 9d05e3bb2d5a3a85901b60b625103f2df0dd69ac Mon Sep 17 00:00:00 2001
 From: Sebastian Lackner <sebastian@fds-team.de>
 Date: Sat, 30 May 2015 02:23:44 +0200
-Subject: [PATCH 04/19] winecfg: Add checkbox to enable/disable HideWineExports
+Subject: [PATCH 04/23] winecfg: Add checkbox to enable/disable HideWineExports
  registry key.
 
 ---

@@ -1,7 +1,7 @@
-From 660673037979225939fce41eaed81348f29e6f17 Mon Sep 17 00:00:00 2001
+From d9cd208aaa439c7d2a06a6a1c806edcc982adfba Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?R=C3=A9mi=20Bernon?= <rbernon@codeweavers.com>
 Date: Wed, 30 Nov 2022 18:46:00 +0100
-Subject: [PATCH 13/19] winex11: Support fixed X11 keycode to scancode
+Subject: [PATCH 13/23] winex11: Support fixed X11 keycode to scancode
  conversion.
 
 X11 keycodes are just Linux keycodes + 8 nowadays according to evdev or
@@ -17,7 +17,7 @@ Wine-Bug: https://bugs.winehq.org/show_bug.cgi?id=45605
  3 files changed, 47 insertions(+), 2 deletions(-)
 
 diff --git a/dlls/winex11.drv/keyboard.c b/dlls/winex11.drv/keyboard.c
-index 295ff88..3ecf6ac 100644
+index 185538f..ece1a10 100644
 --- a/dlls/winex11.drv/keyboard.c
 +++ b/dlls/winex11.drv/keyboard.c
 @@ -64,6 +64,46 @@ static const unsigned int ControlMask = 1 << 2;
