@@ -10,109 +10,109 @@ jobs:
   build:
     runs-on: ubuntu-24.04
     steps:
-    - name: Install Headers
-      run: |
-        sudo wget -O /usr/include/linux/ntsync.h https://raw.githubusercontent.com/torvalds/linux/refs/tags/v6.14/include/uapi/linux/ntsync.h
-        sudo wget -O /usr/include/linux/userfaultfd.h https://raw.githubusercontent.com/torvalds/linux/refs/tags/v6.14/include/uapi/linux/userfaultfd.h
+      - name: Install Headers
+        run: |
+          sudo wget -O /usr/include/linux/ntsync.h https://raw.githubusercontent.com/torvalds/linux/refs/tags/v6.14/include/uapi/linux/ntsync.h
+          sudo wget -O /usr/include/linux/userfaultfd.h https://raw.githubusercontent.com/torvalds/linux/refs/tags/v6.14/include/uapi/linux/userfaultfd.h
 
-    - name: Checkout Repository
-      uses: actions/checkout@v3
+      - name: Checkout Repository
+        uses: actions/checkout@v3
 
-    - name: Fetch Sources
-      run: |
-        git clone https://gitlab.winehq.org/wine/wine.git --depth 1 \
-          --revision=${{ env.WINE_COMMIT }}
+      - name: Fetch Sources
+        run: |
+          git clone https://gitlab.winehq.org/wine/wine.git --depth 1 \
+            --revision=${{ env.WINE_COMMIT }}
 
-    - name: Apply Patches
-      run: |
-        echo "INSTALL=${{ github.workspace }}/kombucha" >> $GITHUB_ENV
+      - name: Apply Patches
+        run: |
+          echo "INSTALL=${{ github.workspace }}/kombucha" >> $GITHUB_ENV
 
-        git -C wine apply "$GITHUB_WORKSPACE"/patches/unstable/*.patch
+          git -C wine apply "$GITHUB_WORKSPACE"/patches/${{ env.KOMBUCHA_VERSION }}/*.patch
 
-    - name: Install Build Dependencies
-      run: |
-        sudo apt update -y
-        sudo apt install \
-          autoconf \
-          binutils \
-          build-essential \
-          ccache \
-          gettext \
-          libasound2-dev \
-          libavcodec-dev \
-          libavformat-dev \
-          libcapi20-dev \
-          libcups2-dev \
-          libfontconfig-dev \
-          libfreetype-dev \
-          libgl-dev \
-          libgnutls28-dev \
-          libgphoto2-dev \
-          libgstreamer1.0-dev \
-          libgstreamer-plugins-base1.0-dev \
-          libkrb5-dev \
-          libpcap-dev \
-          libpcsclite-dev \
-          libpulse-dev \
-          libudev-dev \
-          libunwind-dev \
-          libusb-1.0-0-dev \
-          libsane-dev \
-          libsdl2-dev \
-          libv4l-dev \
-          libvulkan-dev \
-          libwayland-dev \
-          libx11-dev \
-          libxcomposite-dev \
-          libxcursor-dev \
-          libxext-dev \
-          libxfixes-dev \
-          libxi-dev \
-          libxkbcommon-dev \
-          libxkbregistry-dev \
-          libxrandr-dev \
-          libxrender-dev \
-          mingw-w64 \
-          ocl-icd-opencl-dev \
-          samba-dev
+      - name: Install Build Dependencies
+        run: |
+          sudo apt update -y
+          sudo apt install \
+            autoconf \
+            binutils \
+            build-essential \
+            ccache \
+            gettext \
+            libasound2-dev \
+            libavcodec-dev \
+            libavformat-dev \
+            libcapi20-dev \
+            libcups2-dev \
+            libfontconfig-dev \
+            libfreetype-dev \
+            libgl-dev \
+            libgnutls28-dev \
+            libgphoto2-dev \
+            libgstreamer1.0-dev \
+            libgstreamer-plugins-base1.0-dev \
+            libkrb5-dev \
+            libpcap-dev \
+            libpcsclite-dev \
+            libpulse-dev \
+            libudev-dev \
+            libunwind-dev \
+            libusb-1.0-0-dev \
+            libsane-dev \
+            libsdl2-dev \
+            libv4l-dev \
+            libvulkan-dev \
+            libwayland-dev \
+            libx11-dev \
+            libxcomposite-dev \
+            libxcursor-dev \
+            libxext-dev \
+            libxfixes-dev \
+            libxi-dev \
+            libxkbcommon-dev \
+            libxkbregistry-dev \
+            libxrandr-dev \
+            libxrender-dev \
+            mingw-w64 \
+            ocl-icd-opencl-dev \
+            samba-dev
 
-    - name: Configure Ccache
-      uses: hendrikmuhs/ccache-action@v1.2
+      - name: Configure Ccache
+        uses: hendrikmuhs/ccache-action@v1.2
 
-    - name: Configure Wine
-      working-directory: wine
-      run: |
-        export CFLAGS='-O2 -ftree-vectorize -pipe -floop-nest-optimize -fgraphite-identity'
-        export x86_64_CFLAGS="$CFLAGS"
-        mkdir -p ${{ env.INSTALL }}
-        ./configure \
-          CC='ccache gcc' \
-          x86_64_CC='ccache x86_64-w64-mingw32-gcc' \
-          --disable-tests \
-          --disable-win16 \
-          --enable-archs=x86_64 \
-          --prefix=${{ env.INSTALL }} \
-          --with-mingw \
-          --without-oss
+      - name: Configure Wine
+        working-directory: wine
+        run: |
+          export CFLAGS='-O2 -ftree-vectorize -pipe -floop-nest-optimize -fgraphite-identity'
+          export x86_64_CFLAGS="$CFLAGS"
+          mkdir -p ${{ env.INSTALL }}
+          ./configure \
+            CC='ccache gcc' \
+            x86_64_CC='ccache x86_64-w64-mingw32-gcc' \
+            --disable-tests \
+            --disable-win16 \
+            --enable-archs=x86_64 \
+            --prefix=${{ env.INSTALL }} \
+            --with-mingw \
+            --without-oss
 
-    - name: Build Wine
-      working-directory: wine
-      run: make -j$(($(nproc) + 1))
+      - name: Build Wine
+        working-directory: wine
+        run: make -j$(($(nproc) + 1))
 
-    - name: Install Wine
-      working-directory: wine
-      run: make install-lib LDCONFIG=/bin/true UPDATE_DESKTOP_DATABASE=/bin/true
+      - name: Install Wine
+        working-directory: wine
+        run: make install-lib LDCONFIG=/bin/true UPDATE_DESKTOP_DATABASE=/bin/true
 
-    - name: Publish
-      env:
-        GH_TOKEN: ${{ github.token }}
-        GH_REPO: ${{ github.repository }}
-      run: |
-        TAG="${{ env.KOMBUCHA_VERSION }}+$(date --utc +%Y%m%d%H%M%S)"
-        NAME="kombucha-${TAG}"
+      - name: Publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          TAG="${{ env.KOMBUCHA_VERSION }}+$(date --utc +%Y%m%d%H%M%S)"
+          NAME="kombucha-${TAG}"
 
-        cd "${{ env.INSTALL }}"/..
-        mv "${{ env.INSTALL }}" "${NAME}"
-        XZ_OPT=-9 tar -Jcf "${NAME}.tar.xz" "${NAME}"
+          cd "${{ env.INSTALL }}"/..
+          mv "${{ env.INSTALL }}" "${NAME}"
+          XZ_OPT=-9 tar -Jcf "${NAME}.tar.xz" "${NAME}"
 
-        gh release create --prerelease --generate-notes "${TAG}" "${NAME}.tar.xz"
+          gh release create --prerelease --generate-notes "${TAG}" "${NAME}.tar.xz"

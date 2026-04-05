@@ -27,7 +27,7 @@ jobs:
         run: |
           echo "INSTALL=${{ github.workspace }}/kombucha" >> $GITHUB_ENV
 
-          git -C wine apply "$GITHUB_WORKSPACE"/patches/stable/*.patch
+          git -C wine apply "$GITHUB_WORKSPACE"/patches/${{ env.KOMBUCHA_VERSION }}/*.patch
 
       - name: Install Build Dependencies
         run: |
