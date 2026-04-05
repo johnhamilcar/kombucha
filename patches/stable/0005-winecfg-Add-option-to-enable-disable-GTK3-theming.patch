@@ -1,7 +1,7 @@
-From 1c505371615437f3246b5a0fac07071046eb8b0f Mon Sep 17 00:00:00 2001
+From 589118cd20458849ce2cdbd75f327ace5e0f4198 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Michael=20M=C3=BCller?= <michael@fds-team.de>
 Date: Sun, 9 Aug 2015 18:01:11 +0200
-Subject: [PATCH 05/24] winecfg: Add option to enable/disable GTK3 theming.
+Subject: [PATCH 05/23] winecfg: Add option to enable/disable GTK3 theming.
 
 ---
  programs/winecfg/resource.h |  1 +
@@ -10,7 +10,7 @@ Subject: [PATCH 05/24] winecfg: Add option to enable/disable GTK3 theming.
  3 files changed, 22 insertions(+)
 
 diff --git a/programs/winecfg/resource.h b/programs/winecfg/resource.h
-index 04e41976915..df46dcd03fe 100644
+index 04e4197..df46dcd 100644
 --- a/programs/winecfg/resource.h
 +++ b/programs/winecfg/resource.h
 @@ -221,6 +221,7 @@
@@ -22,7 +22,7 @@ index 04e41976915..df46dcd03fe 100644
  /* About tab */
  #define IDC_ABT_OWNER                8432
 diff --git a/programs/winecfg/staging.c b/programs/winecfg/staging.c
-index 7e74466fa9e..975735c6f9c 100644
+index 7e74466..975735c 100644
 --- a/programs/winecfg/staging.c
 +++ b/programs/winecfg/staging.c
 @@ -90,6 +90,21 @@ static void hidewine_set(BOOL status)
@@ -67,7 +67,7 @@ index 7e74466fa9e..975735c6f9c 100644
          break;
      }
 diff --git a/programs/winecfg/winecfg.rc b/programs/winecfg/winecfg.rc
-index 3f17d850927..460000c6b87 100644
+index 3f17d85..460000c 100644
 --- a/programs/winecfg/winecfg.rc
 +++ b/programs/winecfg/winecfg.rc
 @@ -331,6 +331,7 @@ BEGIN

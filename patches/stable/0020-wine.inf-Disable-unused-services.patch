@@ -1,7 +1,7 @@
-From 32e79fc7ca5d4074ad8895f3e09835ee7241a824 Mon Sep 17 00:00:00 2001
+From 17d92520efb2912232154954a51d0a2a30ddd3ae Mon Sep 17 00:00:00 2001
 From: sewn <sewn@disroot.org>
 Date: Fri, 26 Dec 2025 17:11:53 +0300
-Subject: [PATCH 20/24] wine.inf: Disable unused services
+Subject: [PATCH 20/23] wine.inf: Disable unused services
 
 Signed-off-by: sewn <sewn@disroot.org>
 ---
@@ -9,10 +9,10 @@ Signed-off-by: sewn <sewn@disroot.org>
  1 file changed, 3 deletions(-)
 
 diff --git a/loader/wine.inf.in b/loader/wine.inf.in
-index 80a4a062351..da23557b263 100644
+index fc3f085..b61e3e9 100644
 --- a/loader/wine.inf.in
 +++ b/loader/wine.inf.in
-@@ -1099,7 +1099,6 @@ StartType=3
+@@ -1108,7 +1108,6 @@ StartType=3
  ErrorControl=1
  
  [Services]
@@ -20,7 +20,7 @@ index 80a4a062351..da23557b263 100644
  HKLM,"System\CurrentControlSet\Services\Dnscache\Parameters",,16
  HKLM,"System\CurrentControlSet\Services\Eventlog\Application",,16
  HKLM,"System\CurrentControlSet\Services\Eventlog\System","Sources",0x10000,""
-@@ -1219,10 +1218,8 @@ services,"@%11%\ws2_32.dll,-4"
+@@ -1228,10 +1227,8 @@ services,"@%11%\ws2_32.dll,-4"
  [InfFiles]
  input.inf,"@%12%\hidclass.sys,-1"
  mouhid.inf,"@%12%\mouhid.sys,-1"

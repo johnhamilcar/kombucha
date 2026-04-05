@@ -1,7 +1,7 @@
-From 6e8d89b642f7f18bb2fac1abc028bb1be98ae701 Mon Sep 17 00:00:00 2001
+From b96d5e1194d1d608d7cb9357506f5ca49bb61462 Mon Sep 17 00:00:00 2001
 From: sewn <sewn@disroot.org>
 Date: Thu, 25 Dec 2025 21:32:39 +0300
-Subject: [PATCH 19/24] winedbg: Disable
+Subject: [PATCH 19/23] winedbg: Disable
 
 Signed-off-by: sewn <sewn@disroot.org>
 ---
@@ -9,7 +9,7 @@ Signed-off-by: sewn <sewn@disroot.org>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/programs/winedbg/intvar.h b/programs/winedbg/intvar.h
-index db117c96561..3ce9f59ac5d 100644
+index db117c9..3ce9f59 100644
 --- a/programs/winedbg/intvar.h
 +++ b/programs/winedbg/intvar.h
 @@ -38,4 +38,4 @@ INTERNAL_VAR(AlwaysShowThunks,          FALSE,  NULL,           dbg_itype_unsign

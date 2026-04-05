@@ -1,7 +1,7 @@
-From 3348a58ae29d12e637a795f1ae4ed1ea17f010a1 Mon Sep 17 00:00:00 2001
+From cb7f69593496d38521a30a45df7d5ce2243998bb Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?R=C3=A9mi=20Bernon?= <rbernon@codeweavers.com>
 Date: Fri, 6 Jan 2023 09:27:18 +0100
-Subject: [PATCH 11/24] winecfg: Add a keyboard scancode detection toggle
+Subject: [PATCH 11/23] winecfg: Add a keyboard scancode detection toggle
  option.
 
 Wine-Bug: https://bugs.winehq.org/show_bug.cgi?id=30984
@@ -13,7 +13,7 @@ Wine-Bug: https://bugs.winehq.org/show_bug.cgi?id=45605
  3 files changed, 15 insertions(+)
 
 diff --git a/programs/winecfg/input.c b/programs/winecfg/input.c
-index f2f035df80f..a9d83b45f00 100644
+index f2f035d..a9d83b4 100644
 --- a/programs/winecfg/input.c
 +++ b/programs/winecfg/input.c
 @@ -65,6 +65,11 @@ static void init_dialog( HWND dialog )
@@ -51,7 +51,7 @@ index f2f035df80f..a9d83b45f00 100644
              break;
  
 diff --git a/programs/winecfg/resource.h b/programs/winecfg/resource.h
-index 05331f9db58..58ae5986daf 100644
+index 05331f9..58ae598 100644
 --- a/programs/winecfg/resource.h
 +++ b/programs/winecfg/resource.h
 @@ -236,5 +236,6 @@
@@ -62,7 +62,7 @@ index 05331f9db58..58ae5986daf 100644
  
  #define IDS_INPUT_AUTO_DETECT_LAYOUT    8501
 diff --git a/programs/winecfg/winecfg.rc b/programs/winecfg/winecfg.rc
-index 6c814617f15..ff116523500 100644
+index 6c81461..ff11652 100644
 --- a/programs/winecfg/winecfg.rc
 +++ b/programs/winecfg/winecfg.rc
 @@ -349,6 +349,7 @@ BEGIN

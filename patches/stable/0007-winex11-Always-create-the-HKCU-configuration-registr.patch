@@ -1,7 +1,7 @@
-From 3181c72e14509c82e1b1ebb1f5096a17242f8017 Mon Sep 17 00:00:00 2001
+From c38b26b9cfefeccd7526b5b4ef2e8b8be2ceb444 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?R=C3=A9mi=20Bernon?= <rbernon@codeweavers.com>
 Date: Fri, 6 Jan 2023 11:22:10 +0100
-Subject: [PATCH 07/24] winex11: Always create the HKCU configuration registry
+Subject: [PATCH 07/23] winex11: Always create the HKCU configuration registry
  key.
 
 Wine-Bug: https://bugs.winehq.org/show_bug.cgi?id=30984
@@ -11,10 +11,10 @@ Wine-Bug: https://bugs.winehq.org/show_bug.cgi?id=45605
  1 file changed, 64 insertions(+), 3 deletions(-)
 
 diff --git a/dlls/winex11.drv/x11drv_main.c b/dlls/winex11.drv/x11drv_main.c
-index 0b8eedadd98..5930ce68100 100644
+index 1bdcd28..bd54b19 100644
 --- a/dlls/winex11.drv/x11drv_main.c
 +++ b/dlls/winex11.drv/x11drv_main.c
-@@ -330,11 +330,61 @@ HKEY reg_open_key( HKEY root, const WCHAR *name, ULONG name_len )
+@@ -329,11 +329,61 @@ HKEY reg_open_key( HKEY root, const WCHAR *name, ULONG name_len )
      return NtOpenKeyEx( &ret, MAXIMUM_ALLOWED, &attr, 0 ) ? 0 : ret;
  }
  
@@ -77,7 +77,7 @@ index 0b8eedadd98..5930ce68100 100644
  
      if (!hkcu)
      {
-@@ -359,7 +409,18 @@ HKEY open_hkcu_key( const char *name )
+@@ -358,7 +408,18 @@ HKEY open_hkcu_key( const char *name )
          hkcu = reg_open_key( NULL, bufferW, len * sizeof(WCHAR) );
      }
  
@@ -97,7 +97,7 @@ index 0b8eedadd98..5930ce68100 100644
  }
  
  
-@@ -423,7 +484,7 @@ static void setup_options(void)
+@@ -422,7 +483,7 @@ static void setup_options(void)
      DWORD len;
  
      /* @@ Wine registry key: HKCU\Software\Wine\X11 Driver */
